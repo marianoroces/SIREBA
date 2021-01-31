@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--- LOG IN ACTIVITY -->
+    <dimen name="loginScreenTitle">40dp</dimen>
+    <dimen name="loginTitle">20dp</dimen>
+
+    <!--- CREATE ACCOUNT ACTIVITY -->
+    <dimen name="createActTitle">20dp</dimen>
+</resources>

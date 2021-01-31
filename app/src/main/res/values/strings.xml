@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">SIREBA</string>
+
+    <!-- LOG IN SCREEN -->
+    <string name="loginTitle">SIREBA</string>
+    <string name="loginIniciarSesion">Iniciar Sesion</string>
+    <string name="loginLblEmail">Email</string>
+    <string name="loginLblPassword">Contraseña</string>
+    <string name="loginButtonCreateAccount">Crear Cuenta</string>
+
+    <!--- CREATE ACCOUNT ACITIVTY -->
+    <string name="createActTitle">Crear Cuenta</string>
+    <string name="createActLblEmail">Email</string>
+    <string name="createActLblPassword">Contraseña</string>
+    <string name="createActCBTerms">Acepto los Terminos y Condiciones y las politicas de privacidad.</string>
+    <string name="creactActButtonContinue">Continuar</string>
+
+    <!--- START SCREEN ACTIVITY -->
+    <string name="startScreenTitle">SIREBA</string>
+    <string name="startScreenCreateReport">Crear un reporte</string>
+    <string name="startScreenCheckReports">Consultar reportes</string>
+
+    <!--- CREATE REPORT ACTIVITY -->
+    <string name="createRpTitle">Generar Reporte</string>
+    <string name="createRpLblDate">Fecha</string>
+    <string name="createRpLblCategory">Categoria</string>
+    <string name="createRpLblDescription">Descripcion</string>
+    <string name="createRpLblLocation">Ubicacion</string>
+    <string name="createRpButtonSelectDate">Seleccionar</string>
+    <string name="createRpButtonSelectOnMap">Seleccionar ubicacion en el mapa</string>
+    <string name="createRpButtonTakePicture">Tomar Fotografia</string>
+    <string name="createRpButtonContinue">Continuar</string>
+</resources>

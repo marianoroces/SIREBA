@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.CreateReportActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".Activities.CreateReportActivity">
+
+        <TextView
+            android:id="@+id/createRpTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="40dp"
+            android:text="@string/createRpTitle"
+            android:textSize="@dimen/createActTitle"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/createRpLblDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            android:text="@string/createRpLblDate"
+            android:textColor="@color/colorMotivo"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/createRpTitle"/>
+
+        <LinearLayout
+            android:id="@+id/createRpLayoutDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="@id/createRpLblDate">
+
+            <EditText
+                android:id="@+id/createRpTxtDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="35dp"
+                android:layout_marginEnd="10dp"
+                android:hint="dd/mm/aaaa"
+                android:inputType="date"
+                android:textColor="#000000" />
+
+            <Button
+                android:id="@+id/createRpBtnDate"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="35dp"
+                android:background="@drawable/green_button"
+                android:text="@string/createRpButtonSelectDate"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/createRpLblCategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/createRpLblCategory"
+            android:textColor="@color/colorMotivo"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createRpLayoutDate"/>
+
+        <Spinner
+            android:id="@+id/createRpSpinnerCategory"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/custom_spinner"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createRpLblCategory"/>
+
+        <TextView
+            android:id="@+id/createRpLblDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/createRpLblDescription"
+            android:textColor="@color/colorMotivo"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createRpSpinnerCategory"/>
+
+        <EditText
+            android:id="@+id/createRpTxtDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createRpLblDescription"/>
+
+        <TextView
+            android:id="@+id/createRpLblLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/createRpLblLocation"
+            android:textColor="@color/colorMotivo"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createRpTxtDescription"/>
+
+        <EditText
+            android:id="@+id/createRpTxtLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="10dp"
+            android:enabled="false"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/createRpLblLocation"/>
+
+        <Button
+            android:id="@+id/createRpBtnSelectOnMap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/createRpButtonSelectOnMap"
+            android:background="@drawable/green_button"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createRpTxtLocation" />
+
+        <Button
+            android:id="@+id/createRpBtnTakePicture"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginTop="20dp"
+            android:text="@string/createRpButtonTakePicture"
+            android:background="@drawable/green_button"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createRpBtnSelectOnMap" />
+
+        <Button
+            android:id="@+id/createRpBtnContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginEnd="35dp"
+            android:layout_marginBottom="40dp"
+            android:background="@drawable/green_button"
+            android:text="@string/createRpButtonContinue"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/createRpBtnTakePicture" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>
