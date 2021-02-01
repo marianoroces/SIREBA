@@ -9,7 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.CreateReportActivity"></activity>
+        <activity
+            android:name=".Activities.ViewReportActivity"
+            android:parentActivityName=".Activities.CheckReportsActivity" />
+        <activity
+            android:name=".Activities.CheckReportsActivity"
+            android:parentActivityName=".Activities.StartScreenActivity" />
+        <activity
+            android:name=".Activities.CreateReportActivity"
+            android:parentActivityName=".Activities.StartScreenActivity" />
         <activity
             android:name=".Activities.StartScreenActivity"
             android:parentActivityName=".Activities.LogInActivity" />

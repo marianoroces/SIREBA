@@ -30,4 +30,16 @@
     <string name="createRpButtonSelectOnMap">Seleccionar ubicacion en el mapa</string>
     <string name="createRpButtonTakePicture">Tomar Fotografia</string>
     <string name="createRpButtonContinue">Continuar</string>
+
+    <!--- CHECK REPORTS ACTIVITY -->
+    <string name="checkRpTitle">Listado de reportes</string>
+
+    <!--- VIEW REPORT ACTIVITY -->
+    <string name="viewRpTitle">Reporte</string>
+    <string name="viewRpDate">Fecha</string>
+    <string name="viewRpCategory">Categoria</string>
+    <string name="viewRpDescription">Descripcion</string>
+    <string name="viewRpLocation">Ubicacion</string>
+    <string name="viewRpPictureTaken">Fotografia tomada</string>
+    <string name="viewRpViewOnMap">Ver en el mapa</string>
 </resources>
