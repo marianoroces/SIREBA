@@ -1,4 +1,4 @@
-package com.marianoroces.sireba.Activities;
+package com.marianoroces.sireba.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 

@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.CreateReportActivity">
+    tools:context=".activities.CreateReportActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".Activities.CreateReportActivity">
+        tools:context=".activities.CreateReportActivity">
 
         <TextView
             android:id="@+id/createRpTitle"
