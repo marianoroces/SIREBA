@@ -19,7 +19,11 @@ public class MyRetrofit {
     }
 
     private MyRetrofit() {
-        Gson gson = new GsonBuilder().setLenient().create();
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .setDateFormat("dd/MM/yyyy")
+                .create();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:3000/")
                 .addConverterFactory(GsonConverterFactory.create(gson))

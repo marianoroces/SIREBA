@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.marianoroces.sireba.R;
@@ -17,6 +19,13 @@ import java.util.List;
 
 public class CreateReportActivity extends AppCompatActivity implements OnCategoryResultCallback {
 
+    EditText etDate;
+    EditText etDescription;
+    EditText etLocation;
+    Button btnSelectDate;
+    Button btnSelectLocation;
+    Button btnTakePicture;
+    Button btnContinue;
     Spinner spCategories;
     List<String> categoryNames;
     CategoryRepository categoryRepository;
@@ -28,7 +37,7 @@ public class CreateReportActivity extends AppCompatActivity implements OnCategor
 
         categoryRepository = new CategoryRepository(this);
 
-        spCategories = findViewById(R.id.createRpSpinnerCategory);
+        initializeComponents();
 
         categoryNames = new ArrayList<String>();
 
@@ -51,5 +60,16 @@ public class CreateReportActivity extends AppCompatActivity implements OnCategor
     @Override
     public void onResult(Category category) {
 
+    }
+
+    private void initializeComponents(){
+        etDate = findViewById(R.id.createRpTxtDate);
+        etDescription = findViewById(R.id.createRpTxtDescription);
+        etLocation = findViewById(R.id.createRpTxtLocation);
+        spCategories = findViewById(R.id.createRpSpinnerCategory);
+        btnSelectDate = findViewById(R.id.createRpBtnDate);
+        btnContinue = findViewById(R.id.createRpBtnContinue);
+        btnSelectLocation = findViewById(R.id.createRpBtnSelectOnMap);
+        btnTakePicture = findViewById(R.id.createRpBtnTakePicture);
     }
 }

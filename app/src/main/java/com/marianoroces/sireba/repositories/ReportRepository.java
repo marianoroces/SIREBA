@@ -43,7 +43,7 @@ public class ReportRepository implements OnReportResultCallback {
 
                     @Override
                     public void onFailure(Call<List<Report>> call, Throwable t) {
-                        Log.d("DEBUG", "Buscar todos los resportes fallido");
+                        Log.d("DEBUG", "Buscar todos los reportes fallido");
                         Log.d("DEBUG", t.getMessage());
                     }
                 }
