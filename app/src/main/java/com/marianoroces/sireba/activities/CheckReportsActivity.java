@@ -45,7 +45,7 @@ public class CheckReportsActivity extends AppCompatActivity implements OnReportR
     }
 
     @Override
-    public void onResult(List<Report> reports) {
+    public void onReportListResult(List<Report> reports) {
         reportsList = reports;
         showResults(reportsList);
         reportsAdapter.refreshData(reportsList);
@@ -53,7 +53,7 @@ public class CheckReportsActivity extends AppCompatActivity implements OnReportR
     }
 
     @Override
-    public void onResult(Report report) {
+    public void onReportListResult(Report report) {
 
     }
 

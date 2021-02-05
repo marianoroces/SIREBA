@@ -42,4 +42,7 @@
     <string name="viewRpLocation">Ubicacion</string>
     <string name="viewRpPictureTaken">Fotografia tomada</string>
     <string name="viewRpViewOnMap">Ver en el mapa</string>
+
+    <!--- LOCATION MAP ACTIVITY -->
+    <string name="title_activity_report_map">SIREBA</string>
 </resources>

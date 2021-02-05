@@ -36,7 +36,7 @@ public class CategoryRepository implements OnCategoryResultCallback {
                             Log.d("DEBUG", "Buscar todas las categorias exitoso");
                             categoriesList.clear();
                             categoriesList.addAll(response.body());
-                            categoryCallback.onResult(categoriesList);
+                            categoryCallback.onCategoryListResult(categoriesList);
                         }
                     }
 
@@ -50,12 +50,12 @@ public class CategoryRepository implements OnCategoryResultCallback {
     }
 
     @Override
-    public void onResult(List<Category> categoriesList) {
-        categoryCallback.onResult(categoriesList);
+    public void onCategoryListResult(List<Category> categoriesList) {
+        categoryCallback.onCategoryListResult(categoriesList);
     }
 
     @Override
-    public void onResult(Category category) {
-        categoryCallback.onResult(category);
+    public void onCategoryListResult(Category category) {
+        categoryCallback.onCategoryListResult(category);
     }
 }

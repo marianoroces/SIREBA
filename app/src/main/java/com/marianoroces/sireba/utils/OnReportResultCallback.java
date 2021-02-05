@@ -5,6 +5,6 @@ import com.marianoroces.sireba.model.Report;
 import java.util.List;
 
 public interface OnReportResultCallback {
-    void onResult(List<Report> reportsList);
-    void onResult(Report report);
+    void onReportListResult(List<Report> reportsList);
+    void onReportListResult(Report report);
 }

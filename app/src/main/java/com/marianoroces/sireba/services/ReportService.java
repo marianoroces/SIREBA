@@ -9,7 +9,7 @@ import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
-import retrofit2.http.PUT;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 public interface ReportService {
@@ -23,7 +23,7 @@ public interface ReportService {
     @DELETE("reports/{id}")
     Call<Report> deleteReport(@Path("id") int id);
 
-    @PUT("reports")
+    @POST("reports")
     Call<Report> saveReport(@Body JsonObject body);
 
 }

@@ -5,6 +5,6 @@ import com.marianoroces.sireba.model.Category;
 import java.util.List;
 
 public interface OnCategoryResultCallback {
-    void onResult(List<Category> categoriesList);
-    void onResult(Category category);
+    void onCategoryListResult(List<Category> categoriesList);
+    void onCategoryListResult(Category category);
 }

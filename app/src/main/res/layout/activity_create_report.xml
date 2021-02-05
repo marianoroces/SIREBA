@@ -52,7 +52,6 @@
                 android:layout_marginEnd="10dp"
                 android:hint="dd/mm/aaaa"
                 android:enabled="false"
-                android:inputType="date"
                 android:textColor="#000000" />
 
             <Button
