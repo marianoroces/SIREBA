@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -59,6 +58,8 @@ public class CreateReportActivity extends AppCompatActivity
     Report report = new Report();
     ReportRepository reportRepository;
 
+    private int NEXT_REPORT_ID;
+
     static final int CAMERA_REQUEST = 1;
     static final int GALLERY_REQUEST = 2;
     public final int SELECT_LOCATION_CODE = 3;
@@ -76,6 +77,7 @@ public class CreateReportActivity extends AppCompatActivity
         categoryNames = new ArrayList<String>();
 
         categoryRepository.getAll();
+        reportRepository.getAll();
 
         btnTakePicture.setOnClickListener(new Button.OnClickListener() {
             @Override
@@ -95,6 +97,7 @@ public class CreateReportActivity extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 Intent mapIntent = new Intent(CreateReportActivity.this, ReportMapActivity.class);
+                mapIntent.putExtra("startedFrom", "Create Report");
                 startActivityForResult(mapIntent, SELECT_LOCATION_CODE);
             }
         });
@@ -102,6 +105,7 @@ public class CreateReportActivity extends AppCompatActivity
         btnContinue.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
+                report.setId(NEXT_REPORT_ID);
                 report.setDescription(etDescription.getText().toString());
                 for(Category aux : categoryObjects) {
                     if(aux.getCategoryName() == spCategories.getSelectedItem()) {
@@ -110,6 +114,7 @@ public class CreateReportActivity extends AppCompatActivity
                         Log.d("DEBUG", report.getCategory().getCategoryName());
                     }
                 }
+
                 Log.d("REPORT", report.getDescription());
                 Log.d("REPORT", report.getDate().toString());
                 Log.d("REPORT", report.getLocation());
@@ -141,7 +146,7 @@ public class CreateReportActivity extends AppCompatActivity
 
     private void storage(){
         StorageReference storageReference = storage.getReference();
-        reportImageReference = storageReference.child("images/report_id.jpg");
+        reportImageReference = storageReference.child("images/report_id_"+NEXT_REPORT_ID+".jpg");
     }
 
     @Override
@@ -186,31 +191,6 @@ public class CreateReportActivity extends AppCompatActivity
                     builder.show();
             }
         }
-        /*if ((requestCode == CAMERA_REQUEST || requestCode == GALLERY_REQUEST) && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            imageBitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-            imageData = baos.toByteArray();
-
-            AlertDialog.Builder builder = new AlertDialog.Builder(CreateReportActivity.this);
-            builder.setMessage("Agregar foto al reporte?")
-                    .setTitle("Nuevo reporte")
-                    .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-                            storage();
-                            saveReportPicture();
-                        }
-                    })
-                    .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialogInterface, int i) {
-
-                        }
-                    });
-            builder.show();
-        }*/
     }
 
     private void saveReportPicture() {
@@ -243,14 +223,9 @@ public class CreateReportActivity extends AppCompatActivity
 
     @Override
     public void onDateSet(Date date) {
-        Date todaysDate = new Date();
-        if(todaysDate.before(date)) {
-            Toast.makeText(this, "Seleccionar una fecha valida", Toast.LENGTH_LONG).show();
-        } else {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
             etDate.setText(dateFormat.format(date));
             report.setDate(date);
-        }
     }
 
     @Override
@@ -274,7 +249,11 @@ public class CreateReportActivity extends AppCompatActivity
 
     @Override
     public void onReportListResult(List<Report> reportsList) {
+        NEXT_REPORT_ID = reportsList.size()+1;
 
+        Log.d("DEBUG", "REPORTS: "+reportsList.size());
+        Log.d("DEBUG", "NEXT ID: "+(reportsList.size()+1));
+        Log.d("DEBUG", "PICTURE URL: images/report_id_"+NEXT_REPORT_ID+".jpg");
     }
 
     @Override

@@ -56,48 +56,73 @@ public class ReportMapActivity extends AppCompatActivity implements OnMapReadyCa
         this.mMap = googleMap;
         refreshMap();
 
-        mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
-            @Override
-            public void onMapLongClick(LatLng latLng) {
-                mMap.clear();
-                Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-                List<Address> addresses = new ArrayList<>();
+        if(getIntent().getStringExtra("startedFrom").equalsIgnoreCase("Create Report")) {
+            mMap.setOnMapLongClickListener(new GoogleMap.OnMapLongClickListener() {
+                @Override
+                public void onMapLongClick(LatLng latLng) {
+                    mMap.clear();
+                    Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+                    List<Address> addresses = new ArrayList<>();
 
-                try {
-                    addresses = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
-                } catch (IOException e) {
-                    Log.d("DEBUG", e.getMessage());
+                    try {
+                        addresses = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1);
+                    } catch (IOException e) {
+                        Log.d("DEBUG", e.getMessage());
+                    }
+                    String addressAux = addresses.get(0).getAddressLine(0);
+                    String realAddres = addressAux.substring(0, addressAux.indexOf(","));
+                    mMap.addMarker(new MarkerOptions()
+                            .position(latLng)
+                            .title(realAddres)
+                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(ReportMapActivity.this);
+                    builder.setMessage("Seleccionar ubicacion?")
+                            .setTitle(realAddres)
+                            .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    Intent mapLocation = new Intent();
+                                    mapLocation.putExtra("address", realAddres);
+                                    mapLocation.putExtra("mapLat", latLng.latitude);
+                                    mapLocation.putExtra("mapLng", latLng.longitude);
+                                    setResult(RESULT_OK, mapLocation);
+                                    finish();
+                                }
+                            })
+                            .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+
+                                }
+                            });
+                    builder.show();
                 }
-                String addressAux = addresses.get(0).getAddressLine(0);
-                String realAddres = addressAux.substring(0, addressAux.indexOf(","));
-                mMap.addMarker(new MarkerOptions()
-                .position(latLng)
-                .title(realAddres)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+            });
+        } else {
+            LatLng reportLocation = new LatLng(
+                    getIntent().getDoubleExtra("lat", 00.000000000000000),
+                    getIntent().getDoubleExtra("lng", 00.000000000000000)
+            );
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(ReportMapActivity.this);
-                builder.setMessage("Seleccionar ubicacion?")
-                        .setTitle(realAddres)
-                        .setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
-                                Intent mapLocation = new Intent();
-                                mapLocation.putExtra("address", realAddres);
-                                mapLocation.putExtra("mapLat", latLng.latitude);
-                                mapLocation.putExtra("mapLng", latLng.longitude);
-                                setResult(RESULT_OK, mapLocation);
-                                finish();
-                            }
-                        })
-                        .setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialogInterface, int i) {
+            Geocoder geoCoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            List<Address> addresses = new ArrayList<>();
 
-                            }
-                        });
-                builder.show();
+            try {
+                addresses = geoCoder.getFromLocation(reportLocation.latitude, reportLocation.longitude, 1);
+            } catch (IOException e) {
+                Log.d("DEBUG", e.getMessage());
             }
-        });
+            String addressAux = addresses.get(0).getAddressLine(0);
+            String realAddres = addressAux.substring(0, addressAux.indexOf(","));
+
+            mMap.clear();
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(reportLocation, 15));
+            mMap.addMarker(new MarkerOptions()
+                    .position(reportLocation)
+                    .title(realAddres)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
+        }
     }
 
     private void refreshMap(){
@@ -110,21 +135,30 @@ public class ReportMapActivity extends AppCompatActivity implements OnMapReadyCa
                     9999);
             return;
         }
-        mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setZoomGesturesEnabled(true);
-        mMap.getUiSettings().setZoomControlsEnabled(true);
-        mMap.getUiSettings().setCompassEnabled(true);
 
-        fusedLocationClient.getLastLocation()
-                .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                    @Override
-                    public void onSuccess(Location location) {
-                        if(location != null) {
-                            LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
+        if(getIntent().getStringExtra("startedFrom").equalsIgnoreCase("Create Report")) {
+            mMap.setMyLocationEnabled(true);
+            mMap.getUiSettings().setZoomGesturesEnabled(true);
+            mMap.getUiSettings().setZoomControlsEnabled(true);
+            mMap.getUiSettings().setCompassEnabled(true);
+
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            if(location != null) {
+                                LatLng currentLocation = new LatLng(location.getLatitude(), location.getLongitude());
+                                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(currentLocation, 15));
+                            }
                         }
-                    }
-                });
+                    });
+        } else {
+            mMap.setMyLocationEnabled(false);
+            mMap.getUiSettings().setZoomGesturesEnabled(false);
+            mMap.getUiSettings().setZoomControlsEnabled(false);
+            mMap.getUiSettings().setCompassEnabled(false);
+        }
+
     }
 
     @Override
