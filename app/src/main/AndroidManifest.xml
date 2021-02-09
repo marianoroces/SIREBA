@@ -37,8 +37,7 @@
             android:name=".activities.CreateReportActivity"
             android:parentActivityName=".activities.StartScreenActivity" />
         <activity
-            android:name=".activities.StartScreenActivity"
-            android:parentActivityName=".activities.LogInActivity" />
+            android:name=".activities.StartScreenActivity" />
         <activity
             android:name=".activities.CreateAccountActivity"
             android:parentActivityName=".activities.LogInActivity" />

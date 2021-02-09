@@ -14,11 +14,11 @@ public class MyRetrofit {
 
     private Retrofit retrofit;
 
-    public static MyRetrofit getInstance() {
+    public static MyRetrofit getInstance(){
         return retrofitInstance;
     }
 
-    private MyRetrofit() {
+    private MyRetrofit(){
         Gson gson = new GsonBuilder()
                 .setLenient()
                 .setDateFormat("dd/MM/yyyy")
@@ -36,6 +36,10 @@ public class MyRetrofit {
 
     public CategoryService createCategoryService(){
         return retrofit.create(CategoryService.class);
+    }
+
+    public UserService createUserService(){
+        return retrofit.create(UserService.class);
     }
 
 }

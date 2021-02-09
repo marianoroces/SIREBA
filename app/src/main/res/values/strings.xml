@@ -19,6 +19,7 @@
     <string name="startScreenTitle">SIREBA</string>
     <string name="startScreenCreateReport">Crear un reporte</string>
     <string name="startScreenCheckReports">Consultar reportes</string>
+    <string name="startScreenLogOut">Cerrar sesion</string>
 
     <!--- CREATE REPORT ACTIVITY -->
     <string name="createRpTitle">Generar Reporte</string>
