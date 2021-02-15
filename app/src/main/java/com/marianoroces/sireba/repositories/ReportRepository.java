@@ -76,6 +76,7 @@ public class ReportRepository implements OnReportResultCallback {
             @Override
             public void onResponse(Call<Report> call, Response<Report> response) {
                 Log.d("DEBUG", "Report guardado");
+                reportCallback.onReportListResult(report);
             }
 
             @Override

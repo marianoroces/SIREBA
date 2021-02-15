@@ -42,7 +42,10 @@ public class ReportRecyclerAdapter extends RecyclerView.Adapter<ReportViewHolder
 
         reportHolder.tvCategory.setText(reportAux.getCategory().getCategoryName());
         reportHolder.tvDate.setText(dateFormat.format(reportAux.getDate()));
-        reportHolder.tvDescription.setText(reportAux.getDescription());
+
+        if(reportAux.getDescription().length() >= 2){
+            reportHolder.tvDescription.setText(reportAux.getDescription());
+        }
 
         reportHolder.getBtnCheckReport().setOnClickListener(new Button.OnClickListener() {
             @Override

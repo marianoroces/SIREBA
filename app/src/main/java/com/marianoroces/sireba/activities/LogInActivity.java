@@ -3,7 +3,10 @@ package com.marianoroces.sireba.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +25,7 @@ public class LogInActivity extends AppCompatActivity {
     EditText etEmail, etPassword;
     Button btnLogin, btnCreateAccount;
     private FirebaseAuth firebaseAuth;
+    private final static String NOTIFICATION_CHANNEL_ID = "10001";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,7 @@ public class LogInActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        createNotificationChannel();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         updateUI(currentUser);
     }
@@ -81,4 +86,17 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(NOTIFICATION_CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 }

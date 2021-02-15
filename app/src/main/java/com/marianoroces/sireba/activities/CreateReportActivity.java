@@ -4,8 +4,10 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.BroadcastReceiver;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,6 +31,8 @@ import com.marianoroces.sireba.model.Category;
 import com.marianoroces.sireba.model.Report;
 import com.marianoroces.sireba.repositories.CategoryRepository;
 import com.marianoroces.sireba.repositories.ReportRepository;
+import com.marianoroces.sireba.utils.MyIntentService;
+import com.marianoroces.sireba.utils.MyReceiver;
 import com.marianoroces.sireba.utils.OnCategoryResultCallback;
 import com.marianoroces.sireba.utils.OnReportResultCallback;
 
@@ -57,6 +61,7 @@ public class CreateReportActivity extends AppCompatActivity
     byte[] imageData;
     Report report = new Report();
     ReportRepository reportRepository;
+    BroadcastReceiver myReceiver;
 
     private int NEXT_REPORT_ID;
 
@@ -71,6 +76,11 @@ public class CreateReportActivity extends AppCompatActivity
 
         categoryRepository = new CategoryRepository(this);
         reportRepository = new ReportRepository(this);
+
+        myReceiver = new MyReceiver();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(MyReceiver.REPORT_CREATED_EVENT);
+        this.registerReceiver(myReceiver, filter);
 
         initializeComponents();
 
@@ -258,6 +268,12 @@ public class CreateReportActivity extends AppCompatActivity
 
     @Override
     public void onReportListResult(Report report) {
+        if(this.report.getId() == report.getId()) {
+            Log.d("NOTIFICACION", "Intent creado y enviado - CreateReport");
 
+            Intent notify = new Intent(CreateReportActivity.this, MyIntentService.class);
+            startService(notify);
+            finish();
+        }
     }
 }

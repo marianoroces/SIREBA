@@ -46,4 +46,8 @@
 
     <!--- LOCATION MAP ACTIVITY -->
     <string name="title_activity_report_map">SIREBA</string>
+    
+    <!--- NOTIFICATION INFO -->
+    <string name="channel_name">Reporte</string>
+    <string name="channel_description">Canal para crear nuevos reportes</string>
 </resources>
