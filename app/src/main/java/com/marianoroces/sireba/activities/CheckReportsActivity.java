@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.marianoroces.sireba.R;
 import com.marianoroces.sireba.adapters.ReportRecyclerAdapter;
 import com.marianoroces.sireba.model.Report;
@@ -22,19 +24,21 @@ public class CheckReportsActivity extends AppCompatActivity implements OnReportR
     ReportRecyclerAdapter reportsAdapter;
     List<Report> reportsList;
     ReportRepository reportRepository;
+    FirebaseAuth firebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_reports);
 
-        reportRepository = new ReportRepository(this);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        reportRepository = new ReportRepository(this);
         reportsList = new ArrayList<Report>();
 
-        reportRepository.getAll();
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+        reportRepository.getAllFilteredByUser(currentUser.getUid());
 
         reportsAdapter = new ReportRecyclerAdapter(reportsList, this);
 

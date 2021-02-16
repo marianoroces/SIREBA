@@ -11,6 +11,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface ReportService {
 
@@ -19,6 +20,9 @@ public interface ReportService {
 
     @GET("reports")
     Call<List<Report>> getAllReports();
+
+    @GET("reports")
+    Call<List<Report>> getReportsFilteredByUser(@Query("user.uid") String uid);
 
     @DELETE("reports/{id}")
     Call<Report> deleteReport(@Path("id") int id);

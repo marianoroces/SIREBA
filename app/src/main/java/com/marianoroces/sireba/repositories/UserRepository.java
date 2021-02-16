@@ -18,6 +18,7 @@ import retrofit2.Response;
 public class UserRepository implements OnUserResultCallback {
 
     private User user;
+    private List<User> userList = new ArrayList<>();
     private UserService userService;
     private OnUserResultCallback userCallback;
 
@@ -26,13 +27,32 @@ public class UserRepository implements OnUserResultCallback {
         userCallback = context;
     }
 
-    public void getUser(String uid){
-        Call<User> callUser = userService.getUser(uid);
+    public void getSpecificUser(String uid){
+        Call<List<User>> callUser = userService.getSpecificUser(uid);
+
+        callUser.enqueue(new Callback<List<User>>() {
+            @Override
+            public void onResponse(Call<List<User>> call, Response<List<User>> response) {
+                Log.d("USER", "Buscar usuario especifico exitoso");
+                userList.clear();
+                userList.addAll(response.body());
+                userCallback.onUserResult(userList);
+            }
+
+            @Override
+            public void onFailure(Call<List<User>> call, Throwable t) {
+                Log.d("USER", "Buscar usuario especifico fallido");
+                Log.d("USER", t.getMessage());
+            }
+        });
+    }
+
+    public void getUser(int id){
+        Call<User> callUser = userService.getUser(id);
 
         callUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                Log.d("USER", "Buscar usuario exitoso");
                 user = response.body();
                 userCallback.onUserResult(user);
             }
@@ -40,6 +60,7 @@ public class UserRepository implements OnUserResultCallback {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Log.d("USER", "Buscar usuario fallido");
+                Log.d("USER", t.getMessage());
             }
         });
     }
@@ -71,5 +92,10 @@ public class UserRepository implements OnUserResultCallback {
     @Override
     public void onUserResult(User user) {
         userCallback.onUserResult(user);
+    }
+
+    @Override
+    public void onUserResult(List<User> userList) {
+        userCallback.onUserResult(userList);
     }
 }

@@ -52,13 +52,43 @@ public class ReportRepository implements OnReportResultCallback {
         );
     }
 
+    public void getAllFilteredByUser(String uid){
+        Call<List<Report>> callReports = reportService.getReportsFilteredByUser(uid);
+
+        callReports.enqueue(
+                new Callback<List<Report>>() {
+                    @Override
+                    public void onResponse(Call<List<Report>> call, Response<List<Report>> response) {
+                        if(response.code() == 200){
+                            Log.d("DEBUG", "Buscar todos los reportes filtrados por usuario exitoso");
+                            reportsList.clear();
+                            reportsList.addAll(response.body());
+                            reportCallback.onReportListResult(reportsList);
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Report>> call, Throwable t) {
+                        Log.d("DEBUG", "Buscar todos los reportes filtrados por usuario fallido");
+                        Log.d("DBEUG", t.getMessage());
+                    }
+                }
+        );
+    }
+
     public void save(Report report){
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         JsonObject aux = new JsonObject();
         JsonObject auxCategory = new JsonObject();
+        JsonObject auxUser = new JsonObject();
 
         auxCategory.addProperty("id", report.getCategory().getId());
         auxCategory.addProperty("categoryName", report.getCategory().getCategoryName());
+
+        auxUser.addProperty("uid", report.getUser().getUid());
+        auxUser.addProperty("email", report.getUser().getEmail());
+        auxUser.addProperty("password", report.getUser().getPassword());
+        auxUser.addProperty("id", report.getUser().getId());
 
         aux.addProperty("date", dateFormat.format(report.getDate()));
         aux.add("category", auxCategory);
@@ -67,6 +97,7 @@ public class ReportRepository implements OnReportResultCallback {
         aux.addProperty("locationLat", report.getLocationLat());
         aux.addProperty("locationLng", report.getLocationLng());
         aux.addProperty("pictureURI", report.getPictureURI());
+        aux.add("user", auxUser);
 
         Log.d("REPORT", aux.toString());
 

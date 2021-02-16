@@ -5,11 +5,13 @@ public class User {
     private String uid;
     private String email;
     private String password;
+    private int id;
 
-    public User(String uid, String username, String password) {
+    public User(String uid, String email, String password, int id) {
         this.uid = uid;
-        this.email = username;
+        this.email = email;
         this.password = password;
+        this.id = id;
     }
 
     public User() {
@@ -38,5 +40,13 @@ public class User {
 
     public void setUid(String uid) {
         this.uid = uid;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -22,6 +22,8 @@ import com.marianoroces.sireba.model.User;
 import com.marianoroces.sireba.repositories.UserRepository;
 import com.marianoroces.sireba.utils.OnUserResultCallback;
 
+import java.util.List;
+
 public class CreateAccountActivity extends AppCompatActivity implements OnUserResultCallback {
 
     EditText etEmail, etPassword;
@@ -102,5 +104,10 @@ public class CreateAccountActivity extends AppCompatActivity implements OnUserRe
     @Override
     public void onUserResult(User user) {
         this.user = user;
+    }
+
+    @Override
+    public void onUserResult(List<User> userList) {
+
     }
 }

@@ -22,6 +22,8 @@ import android.widget.Spinner;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -29,12 +31,15 @@ import com.marianoroces.sireba.R;
 import com.marianoroces.sireba.dialogs.DatePickerFragment;
 import com.marianoroces.sireba.model.Category;
 import com.marianoroces.sireba.model.Report;
+import com.marianoroces.sireba.model.User;
 import com.marianoroces.sireba.repositories.CategoryRepository;
 import com.marianoroces.sireba.repositories.ReportRepository;
+import com.marianoroces.sireba.repositories.UserRepository;
 import com.marianoroces.sireba.utils.MyIntentService;
 import com.marianoroces.sireba.utils.MyReceiver;
 import com.marianoroces.sireba.utils.OnCategoryResultCallback;
 import com.marianoroces.sireba.utils.OnReportResultCallback;
+import com.marianoroces.sireba.utils.OnUserResultCallback;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
@@ -43,7 +48,10 @@ import java.util.Date;
 import java.util.List;
 
 public class CreateReportActivity extends AppCompatActivity
-        implements OnCategoryResultCallback, OnReportResultCallback, DatePickerFragment.DatePickerFragmentListener {
+        implements OnCategoryResultCallback,
+        OnReportResultCallback,
+        OnUserResultCallback,
+        DatePickerFragment.DatePickerFragmentListener {
 
     EditText etDate;
     EditText etDescription;
@@ -61,7 +69,10 @@ public class CreateReportActivity extends AppCompatActivity
     byte[] imageData;
     Report report = new Report();
     ReportRepository reportRepository;
+    User user = new User();
+    UserRepository userRepository;
     BroadcastReceiver myReceiver;
+    FirebaseAuth firebaseAuth;
 
     private int NEXT_REPORT_ID;
 
@@ -76,6 +87,7 @@ public class CreateReportActivity extends AppCompatActivity
 
         categoryRepository = new CategoryRepository(this);
         reportRepository = new ReportRepository(this);
+        userRepository = new UserRepository(this);
 
         myReceiver = new MyReceiver();
         IntentFilter filter = new IntentFilter();
@@ -86,6 +98,10 @@ public class CreateReportActivity extends AppCompatActivity
 
         categoryNames = new ArrayList<String>();
 
+        firebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+
+        userRepository.getSpecificUser(currentUser.getUid());
         categoryRepository.getAll();
         reportRepository.getAll();
 
@@ -132,6 +148,7 @@ public class CreateReportActivity extends AppCompatActivity
                 Log.d("REPORT", String.valueOf(report.getLocationLng()));
                 Log.d("REPORT", report.getPictureURI());
                 Log.d("REPORT", String.valueOf(report.getId()));
+                Log.d("REPORT", report.getUser().getUid());
 
                 reportRepository.save(report);
             }
@@ -275,5 +292,26 @@ public class CreateReportActivity extends AppCompatActivity
             startService(notify);
             finish();
         }
+    }
+
+    @Override
+    public void onUserResult(User user) {
+        this.user = user;
+        Log.d("USER", this.user.getUid());
+        Log.d("USER", this.user.getEmail());
+        Log.d("USER", this.user.getPassword());
+
+        report.setUser(this.user);
+    }
+
+    @Override
+    public void onUserResult(List<User> userList){
+        user = userList.get(0);
+        Log.d("USER", user.getUid());
+        Log.d("USER", user.getEmail());
+        Log.d("USER", user.getPassword());
+        Log.d("USER", String.valueOf(user.getId()));
+
+        report.setUser(user);
     }
 }

@@ -12,8 +12,9 @@ public class Report {
     private Double locationLat;
     private Double locationLng;
     private String pictureURI;
+    private User user;
 
-    public Report(int id, Date date, Category category, String description, String location, Double locationLat, Double locationLng, String pictureURI) {
+    public Report(int id, Date date, Category category, String description, String location, Double locationLat, Double locationLng, String pictureURI, User user) {
         this.id = id;
         this.date = date;
         this.category = category;
@@ -22,6 +23,7 @@ public class Report {
         this.locationLat = locationLat;
         this.locationLng = locationLng;
         this.pictureURI = pictureURI;
+        this.user = user;
     }
 
     public Report(){
@@ -90,5 +92,13 @@ public class Report {
 
     public void setPictureURI(String pictureURI) {
         this.pictureURI = pictureURI;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
