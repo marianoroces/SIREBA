@@ -14,6 +14,7 @@
     <string name="createActLblPassword">Contraseña</string>
     <string name="createActCBTerms">Acepto los Terminos y Condiciones y las politicas de privacidad.</string>
     <string name="creactActButtonContinue">Continuar</string>
+    <string name="createActEmailHint">ejemplo@email.com</string>
 
     <!--- START SCREEN ACTIVITY -->
     <string name="startScreenTitle">SIREBA</string>
@@ -50,4 +51,10 @@
     <!--- NOTIFICATION INFO -->
     <string name="channel_name">Reporte</string>
     <string name="channel_description">Canal para crear nuevos reportes</string>
+
+    <!--- REPORT RECYCLERVIEW CARD VIEW -->
+    <string name="cvCategory">Categoria</string>
+    <string name="cvDate">Fecha</string>
+    <string name="cvDescription">(Sin descripcion)</string>
+    <string name="cvBtnVer">Ver</string>
 </resources>

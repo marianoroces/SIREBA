@@ -13,7 +13,7 @@
         android:layout_marginTop="50dp"
         android:text="@string/startScreenTitle"
         android:textColor="@color/colorMotivo"
-        android:textSize="@dimen/loginScreenTitle"
+        android:textSize="@dimen/loginScreenTitleTextSize"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

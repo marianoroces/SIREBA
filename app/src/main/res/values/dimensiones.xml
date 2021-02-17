@@ -2,9 +2,87 @@
 <resources>
 
     <!--- LOG IN ACTIVITY -->
-    <dimen name="loginScreenTitle">40dp</dimen>
-    <dimen name="loginTitle">20dp</dimen>
+    <dimen name="loginScreenTitleTextSize">40dp</dimen>
+    <dimen name="loginScreenTitleTopMargin">50dp</dimen>
+    <dimen name="loginTitleTextSize">20dp</dimen>
+    <dimen name="loginTitleTopMargin">75dp</dimen>
+    <dimen name="loginTVStartMargin">40dp</dimen>
+    <dimen name="loginEmailTopMargin">50dp</dimen>
+    <dimen name="loginPasswordTopMargin">20dp</dimen>
+    <dimen name="loginETStartMargin">35dp</dimen>
+    <dimen name="loginETEndMargin">35dp</dimen>
+    <dimen name="loginETTopMargin">10dp</dimen>
+    <dimen name="loginBTNStartMargin">35dp</dimen>
+    <dimen name="loginBTNEndMargin">35dp</dimen>
+    <dimen name="loginBTNLogIn">20dp</dimen>
+    <dimen name="loginBTNCreateAccount">40dp</dimen>
 
     <!--- CREATE ACCOUNT ACTIVITY -->
-    <dimen name="createActTitle">20dp</dimen>
+    <dimen name="createActTitleTextSize">20dp</dimen>
+    <dimen name="createActTVStartMargin">40dp</dimen>
+    <dimen name="createActTitleTopMargin">20dp</dimen>
+    <dimen name="createActEmailTopMargin">50dp</dimen>
+    <dimen name="createActPasswordTopMargin">20dp</dimen>
+    <dimen name="createActETStartMargin">35dp</dimen>
+    <dimen name="createActETEndMargin">35dp</dimen>
+    <dimen name="createActETTopMargin">10dp</dimen>
+    <dimen name="createActBTNStartMargin">35dp</dimen>
+    <dimen name="createActBTNEndMargin">35dp</dimen>
+    <dimen name="createActBTNTopMargin">40dp</dimen>
+    <dimen name="createActCBStartMargin">35dp</dimen>
+    <dimen name="createActCBEndMargin">35dp</dimen>
+    <dimen name="createActCBTopMargin">20dp</dimen>
+
+    <!-- CHECK REPORTS ACTIVITY -->
+    <dimen name="checkRPTitleStartMargin">40dp</dimen>
+    <dimen name="checkRPTitleTopMargin">20dp</dimen>
+    <dimen name="checkRPRecyclerMargins">20dp</dimen>
+    <dimen name="checkRPRecyclerPaddingBottom">85dp</dimen>
+
+    <!-- CREATE REPORT ACTIVITY -->
+    <dimen name="createRPTVStartMargin">40dp</dimen>
+    <dimen name="createRPTVTopMargin">20dp</dimen>
+    <dimen name="createRPBTNStartMargin">35dp</dimen>
+    <dimen name="createRPBTNEndMargin">35dp</dimen>
+    <dimen name="createRPBTNTopMargin">20dp</dimen>
+    <dimen name="createRPBTNContinueTopMargin">70dp</dimen>
+    <dimen name="createRPBTNContinueBottomMargin">40dp</dimen>
+    <dimen name="createRPETStartMargin">35dp</dimen>
+    <dimen name="createRPETEndMargin">35dp</dimen>
+    <dimen name="createRPETTopMargin">10dp</dimen>
+    <dimen name="createRPSPStartMargin">40dp</dimen>
+    <dimen name="createRPSPEndMargin">40dp</dimen>
+    <dimen name="createRPSPTopMargin">10dp</dimen>
+
+    <!-- VIEW REPORT ACTIVITY -->
+    <dimen name="viewRPTVStartMargin">40dp</dimen>
+    <dimen name="viewRPTVTopMargin">30dp</dimen>
+    <dimen name="viewRPTitleTopMargin">20dp</dimen>
+    <dimen name="viewRPETStartMargin">35dp</dimen>
+    <dimen name="viewRPETEndMargin">35dp</dimen>
+    <dimen name="viewRPETTopMargin">10dp</dimen>
+    <dimen name="viewRPEVHeight">150dp</dimen>
+    <dimen name="viewRPEVStartMargin">40dp</dimen>
+    <dimen name="viewRPEVEndMargin">40dp</dimen>
+    <dimen name="viewRPEVTopMargin">10dp</dimen>
+    <dimen name="viewRPBTNTStartMargin">40dp</dimen>
+    <dimen name="viewRPBTNTEndMargin">30dp</dimen>
+    <dimen name="viewRPBTNTTopMargin">30dp</dimen>
+    <dimen name="viewRPBTNTBottomMargin">40dp</dimen>
+
+    <!-- REPORT RECYCLERVIEW CARD VIEW -->
+    <dimen name="cvElevation">8dp</dimen>
+    <dimen name="cvCornerRadius">12dp</dimen>
+    <dimen name="cvTVStartMargin">12dp</dimen>
+    <dimen name="cvTVTopMargin">12dp</dimen>
+    <dimen name="cvTVEndMargin">12dp</dimen>
+    <dimen name="cvTVTextSize">16dp</dimen>
+    <dimen name="cvDescriptionTopMargin">20dp</dimen>
+    <dimen name="cvDescriptionBottomMargin">12dp</dimen>
+    <dimen name="cvDescriptionTextSize">12dp</dimen>
+    <dimen name="cvBTNHeight">25dp</dimen>
+    <dimen name="cvBTNEndMargin">12dp</dimen>
+    <dimen name="cvBTNTopMargin">12dp</dimen>
+    <dimen name="cvBTNBottomMargin">12dp</dimen>
+
 </resources>

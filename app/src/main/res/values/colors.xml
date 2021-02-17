@@ -5,4 +5,6 @@
     <color name="colorAccent">#CB84E3AB</color>
     <color name="colorMotivo">#CB84E3AB</color>
     <color name="colorMotivoOscuro">#4D84E3AB</color>
+    <color name="colorPureBlack">#000000</color>
+    <color name="colorPureWhite">#FFFFFF</color>
 </resources>
