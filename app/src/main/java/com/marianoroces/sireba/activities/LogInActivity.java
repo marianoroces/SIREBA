@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -50,20 +51,24 @@ public class LogInActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
-                        .addOnCompleteListener(LogInActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()) {
-                                    Log.d("DEBUG", "Crear cuenta con firebase exitoso");
-                                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-                                    updateUI(currentUser);
-                                } else {
-                                    Log.d("DEBUG", "Crear cuenta con firebase fallido");
-                                    updateUI(null);
+                if (!etEmail.getText().toString().equals("") && !etPassword.getText().toString().equals("")) {
+                    firebaseAuth.signInWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
+                            .addOnCompleteListener(LogInActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("DEBUG", "Crear cuenta con firebase exitoso");
+                                        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                                        updateUI(currentUser);
+                                    } else {
+                                        Log.d("DEBUG", "Crear cuenta con firebase fallido");
+                                        updateUI(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                } else {
+                    showErrorMessage();
+                }
             }
         });
     }
@@ -86,6 +91,9 @@ public class LogInActivity extends AppCompatActivity {
         }
     }
 
+    private void showErrorMessage() {
+        Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_LONG).show();
+    }
 
     private void createNotificationChannel() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

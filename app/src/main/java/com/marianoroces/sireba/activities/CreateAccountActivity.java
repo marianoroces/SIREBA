@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -67,25 +68,29 @@ public class CreateAccountActivity extends AppCompatActivity implements OnUserRe
         btnContinue.setOnClickListener(new Button.OnClickListener() {
             @Override
             public void onClick(View view) {
-                firebaseAuth.createUserWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
-                        .addOnCompleteListener(CreateAccountActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if(task.isSuccessful()) {
-                                    Log.d("DEBUG", "Crear cuenta con firebase exitoso");
-                                    FirebaseUser currentUser = firebaseAuth.getCurrentUser();
-                                    user.setUid(currentUser.getUid());
-                                    user.setEmail(etEmail.getText().toString());
-                                    user.setPassword(etPassword.getText().toString());
+                if (!etEmail.getText().toString().equals("") && !etPassword.getText().toString().equals("")) {
+                    firebaseAuth.createUserWithEmailAndPassword(etEmail.getText().toString(), etPassword.getText().toString())
+                            .addOnCompleteListener(CreateAccountActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d("DEBUG", "Crear cuenta con firebase exitoso");
+                                        FirebaseUser currentUser = firebaseAuth.getCurrentUser();
+                                        user.setUid(currentUser.getUid());
+                                        user.setEmail(etEmail.getText().toString());
+                                        user.setPassword(etPassword.getText().toString());
 
-                                    userRepository.save(user);
-                                    updateUI(currentUser);
-                                } else {
-                                    Log.d("DEBUG", "Crear cuenta con firebase fallido");
-                                    updateUI(null);
+                                        userRepository.save(user);
+                                        updateUI(currentUser);
+                                    } else {
+                                        Log.d("DEBUG", "Crear cuenta con firebase fallido");
+                                        updateUI(null);
+                                    }
                                 }
-                            }
-                        });
+                            });
+                } else {
+                    showErrorMessage();
+                }
             }
         });
 
@@ -109,5 +114,9 @@ public class CreateAccountActivity extends AppCompatActivity implements OnUserRe
     @Override
     public void onUserResult(List<User> userList) {
 
+    }
+
+    private void showErrorMessage() {
+        Toast.makeText(this, "Completar todos los campos", Toast.LENGTH_LONG).show();
     }
 }

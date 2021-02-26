@@ -108,6 +108,7 @@
             android:layout_marginStart="@dimen/createRPETStartMargin"
             android:layout_marginEnd="@dimen/createRPETEndMargin"
             android:layout_marginTop="@dimen/createRPETTopMargin"
+            android:hint="@string/createRpLblDescriptionHint"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/createRpLblDescription"/>
 

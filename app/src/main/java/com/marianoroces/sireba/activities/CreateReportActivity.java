@@ -18,6 +18,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -141,16 +142,36 @@ public class CreateReportActivity extends AppCompatActivity
                     }
                 }
 
-                Log.d("REPORT", report.getDescription());
-                Log.d("REPORT", report.getDate().toString());
-                Log.d("REPORT", report.getLocation());
-                Log.d("REPORT", String.valueOf(report.getLocationLat()));
-                Log.d("REPORT", String.valueOf(report.getLocationLng()));
-                Log.d("REPORT", report.getPictureURI());
-                Log.d("REPORT", String.valueOf(report.getId()));
-                Log.d("REPORT", report.getUser().getUid());
+                if(report.getPictureURI() != null) {
+                    if(report.getDate() != null) {
+                        if(report.getLocation() != null) {
+                            if(report.getLocationLat() != null) {
+                                if(report.getLocationLng() != null) {
+                                    Log.d("REPORT", report.getDescription());
+                                    Log.d("REPORT", report.getDate().toString());
+                                    Log.d("REPORT", report.getLocation());
+                                    Log.d("REPORT", String.valueOf(report.getLocationLat()));
+                                    Log.d("REPORT", String.valueOf(report.getLocationLng()));
+                                    Log.d("REPORT", report.getPictureURI());
+                                    Log.d("REPORT", String.valueOf(report.getId()));
+                                    Log.d("REPORT", report.getUser().getUid());
 
-                reportRepository.save(report);
+                                    reportRepository.save(report);
+                                } else {
+                                    showErrorMessage();
+                                }
+                            } else {
+                                showErrorMessage();
+                            }
+                        } else {
+                            showErrorMessage();
+                        }
+                    } else {
+                        showErrorMessage();
+                    }
+                } else {
+                    showErrorMessage();
+                }
             }
         });
     }
@@ -292,6 +313,10 @@ public class CreateReportActivity extends AppCompatActivity
             startService(notify);
             finish();
         }
+    }
+
+    private void showErrorMessage() {
+        Toast.makeText(this, "Completar campos obligatorios", Toast.LENGTH_LONG).show();
     }
 
     @Override
